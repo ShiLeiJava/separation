@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leo.separation.dao.UserDao">
+
+    <insert id="insert" parameterType="user">
+        insert into t_user values(#{id},#{name},#{age},#{birthday})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from t_user where id =#{id}
+    </delete>
+
+    <select id="queryAll" resultType="user">
+      select * from t_user
+    </select>
+
+
+</mapper>

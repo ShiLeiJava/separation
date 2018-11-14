@@ -1,0 +1,63 @@
+#端口设置
+server:
+  port: 8090
+
+#数据库设置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/separation?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: root
+
+#mybatis设置
+mybatis:
+  mapper-locations: classpath*:mybatis/*.xml  #mapper.xml文件所存放的位置
+  type-aliases-package: com.leo.separation.entity
+  configLocation: classpath:/mybatis-config.xml
+
+#读写分离配置
+mysql:
+  datasource:
+    readSize: 1  #读库个数
+    type: com.alibaba.druid.pool.DruidDataSource
+    mapperLocations: classpath*:mybatis/*.xml
+    configLocation: classpath:/mybatis-config.xml
+    write:
+      url: jdbc:mysql://localhost:3306/separation?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+      minIdle: 5
+      maxActive: 100
+      initialSize: 10
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      removeAbandoned: true
+      filters: stat
+    read:
+      url: jdbc:mysql://192.168.1.138:3306/separation?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=true
+      username: admin
+      password: Bt12345678
+      driver-class-name: com.mysql.jdbc.Driver
+      minIdle: 5
+      maxActive: 100
+      initialSize: 10
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      removeAbandoned: true
+      filters: stat
